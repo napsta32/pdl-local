@@ -1,0 +1,21 @@
+arrow==0.7.0
+beautifulsoup4==4.4.1
+bs4==0.0.1
+Django==3.0.8
+django-import-export==2.3.0
+django-rest-swagger==2.2.0
+djangorestframework==3.11.0
+djangorestframework-csv==1.4.1
+Markdown==2.6.6
+psycopg2
+python-dateutil==2.5.2
+PyYAML
+sqlparse==0.3.1
+tablib[all]==2.0.0
+Unipath==1.1
+urllib3==1.14
+django-extensions
+
+# crawling
+Scrapy==2.2.1
+short-url==1.2.2
