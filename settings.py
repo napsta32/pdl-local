@@ -10,12 +10,6 @@
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath('.')))
-# Do not forget the change iCrawler part based on your project name
-os.environ['DJANGO_SETTINGS_MODULE'] = 'proyectos_de_ley.settings.local'
-
-# This is required only if Django Version > 1.8
-import django
-django.setup()
 
 LEGISLATURE = '2016'
 
@@ -25,12 +19,12 @@ SPIDER_MODULES = ['spiders']
 NEWSPIDER_MODULE = 'spiders'
 
 ITEM_PIPELINES = {
-    'pdl_scraper.pipelines.PdlScraperPipeline': 300,
-    'pdl_scraper.pipelines.SeguimientosPipeline': 400,
-    'pdl_scraper.pipelines.IniciativasPipeline': 500,
-    'pdl_scraper.pipelines.PdlPdfurlPipeline': 600,
-    'pdl_scraper.pipelines.UpdaterPipeline': 700,
-    'pdl_scraper.pipelines.ExpedientePipeline': 800,
+    'pipelines.PdlScraperPipeline': 300,
+    'pipelines.SeguimientosPipeline': 400,
+    'pipelines.IniciativasPipeline': 500,
+    'pipelines.PdlPdfurlPipeline': 600,
+    'pipelines.UpdaterPipeline': 700,
+    'pipelines.ExpedientePipeline': 800,
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

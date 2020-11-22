@@ -11,7 +11,7 @@ import six
 import unicodedata
 import logging
 
-from pdl.models import Proyecto
+# from pdl.models import Proyecto
 
 log = logging.getLogger()
 
@@ -37,8 +37,8 @@ class PdlScraperPipeline(object):
         return item
 
     def save_item(self, item):
-        proyecto = Proyecto.objects.filter(codigo=item['codigo'])
-        if True or not proyecto.exists():
+        # proyecto = Proyecto.objects.filter(codigo=item['codigo'])
+        if True: # not proyecto.exists():
             log.debug(">> %s is not in db" % item['codigo'])
             # item_for_db = deepcopy(item)
             # item_for_db['legislatura_name'] = item['legislatura2']
@@ -94,9 +94,9 @@ class PdlScraperPipeline(object):
         return iniciativas_stripped
 
     def save_slug(self, obj):
-        db = db_connect()
-        table = db['pdl_slug']
-        db.query("SELECT setval('pdl_slug_id_seq', (SELECT MAX(id) FROM pdl_slug)+1)")
+        # db = db_connect()
+        # table = db['pdl_slug']
+        # db.query("SELECT setval('pdl_slug_id_seq', (SELECT MAX(id) FROM pdl_slug)+1)")
         for congre in obj['congresistas'].split(';'):
             congre = congre.strip()
             congre_slug = dict(nombre=congre)
@@ -104,10 +104,12 @@ class PdlScraperPipeline(object):
                 slug = self.convert_name_to_slug(congre)
                 congre_slug['slug'] = slug
 
-                res = table.find_one(slug=congre_slug['slug'])
+                # res = table.find_one(slug=congre_slug['slug'])
+                res = None
                 if res is None:
                     # slug doesnotexist
-                    table.insert(congre_slug)
+                    # table.insert(congre_slug) #! FIXME
+                    print("unkown dont know what to do")
                 else:
                     return "slug already in database"
 
@@ -170,11 +172,12 @@ class SeguimientosPipeline(object):
         exist already.
         """
         log.debug("Try to save seguimientos.")
-        db = db_connect()
+        # db = db_connect()
 
         # get proyect id for these seguimientos
-        table = db['pdl_proyecto']
-        res = table.find_one(codigo=item['codigo'])
+        # table = db['pdl_proyecto'] #! Fixme
+        # res = table.find_one(codigo=item['codigo']) #! Fixme
+        res = None
         if res is None:
             log.debug("There is no project with that code: %s" % item['codigo'])
         else:
@@ -241,11 +244,12 @@ class IniciativasPipeline(object):
         exist already.
         """
         log.debug("Try to save iniciativas.")
-        db = db_connect()
+        # db = db_connect()
 
         # get proyect id for these seguimientos
-        table = db['pdl_proyecto']
-        table.update(item, ['codigo'])
+        # table = db['pdl_proyecto']
+        # table.update(item, ['codigo']) #! Fixme
+        print("don't know what to do")
 
 
 class PdlPdfurlPipeline(object):
@@ -253,9 +257,10 @@ class PdlPdfurlPipeline(object):
         if spider.name == 'pdfurl':
             # save pdfurl
             log.debug("Try saving pdf_url to database: %s." % item['codigo'])
-            db = db_connect()
-            table = db['pdl_proyecto']
-            table.update(item, ['codigo'])
+            # db = db_connect()
+            # table = db['pdl_proyecto']
+            # table.update(item, ['codigo']) #! Fixme
+            print("don't know what to do")
             return item
         return item
 
@@ -264,9 +269,10 @@ class UpdaterPipeline(object):
     def process_item(self, item, spider):
         if spider.name == 'updater':
             log.debug("Try saving item to database: %s." % item['codigo'])
-            db = db_connect()
-            table = db['pdl_proyecto']
-            table.update(item, ['codigo'])
+            # db = db_connect()
+            # table = db['pdl_proyecto']
+            # table.update(item, ['codigo']) #! Fixme
+            print("don't know what to do")
             return item
         return item
 
@@ -280,9 +286,9 @@ class UpdateFechaPresentacionPipeline(object):
         return item
 
     def save_item(self, item):
-        db = db_connect()
-        table = db['pdl_proyecto']
-        table.update(item, ['codigo'])
+        # db = db_connect()
+        # table = db['pdl_proyecto']
+        # table.update(item, ['codigo']) #! Fixme
         log.debug("Saving project: %s" % item['codigo'])
 
     def fix_date(self, string):
@@ -316,9 +322,10 @@ class ExpedientePipeline(object):
         :param item: seguimientos
         :return: proyecto_id from pdl_seguimientos table
         """
-        db = db_connect()
-        table = db['pdl_proyecto']
-        res = table.find_one(expediente=item['expediente_url'])
+        # db = db_connect()
+        # table = db['pdl_proyecto']
+        # res = table.find_one(expediente=item['expediente_url']) #! Fixme
+        res = None
         if res is None:
             log.debug("There is no project with that expediente_url: %s" % item['expediente_url'])
         else:
@@ -329,22 +336,23 @@ class ExpedientePipeline(object):
         Try to save if they don't exist already.
         """
         log.debug("Try to save events in expedientes.")
-        db = db_connect()
-        table = db['pdl_expedientes']
+        # db = db_connect()
+        # table = db['pdl_expedientes'] #! Fixme
 
         if item['fecha'] != '':
             # Sometimes we scrap title when there are no events. The fecha will
             # be empty, so continue and ignore this item.
-            res = table.find_one(
-                fecha=item['fecha'],
-                evento=item['evento'],
-                proyecto_id=item['proyecto_id'],
-                pdf_url=item['pdf_url'],
-            )
+            # res = table.find_one(
+            #     fecha=item['fecha'],
+            #     evento=item['evento'],
+            #     proyecto_id=item['proyecto_id'],
+            #     pdf_url=item['pdf_url'],
+            # ) #! Fixme
+            res = None
             if res is None:
                 # not in database
                 log.debug("This event is not in the database.")
-                table.insert(item)
+                # table.insert(item) #! Fixme
             else:
                 log.debug("This event '%s' is already in the database." % item['evento'])
 

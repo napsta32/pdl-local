@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-from pdl_scraper.items import UpdateFechaPresentacionItem
-from pdl_scraper.models import db_connect
+from items import UpdateFechaPresentacionItem
+from models import db_connect
 
 
 class UpdateFechaPresentacionSpider(scrapy.Spider):

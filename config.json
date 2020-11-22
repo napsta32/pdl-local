@@ -1,0 +1,17 @@
+{                                                                                
+    "drivername": "postgresql",                                                  
+    "username": "postgres",
+    "DB_HOST": "postgres",
+    "SECRET_KEY": "randomKey123",
+    "DB_USER": "pdl",
+    "DB_PASS": "MyPassword123",              
+    "DB_PORT": "5432",
+    "password": "MyPassword123",
+    "host": "postgres",
+    "port": "5432",                                                              
+    "database": "pdl",                                                           
+    "crawlera_user": "optional",                                                    
+    "crawlera_pass": "optional",
+    "crawlera_enabled": "false",
+    "legislature": "2016"
+}

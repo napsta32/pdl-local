@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-from pdl_scraper.items import ExpedienteItem
-from pdl_scraper.models import db_connect
-from pdl_scraper import settings
+from items import ExpedienteItem
+from models import db_connect
+import settings
 
 
 class ExpedienteSpider(scrapy.Spider):

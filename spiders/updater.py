@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-from pdl_scraper.items import UpdaterItem
-from pdl_scraper.models import db_connect
+from items import UpdaterItem
+from models import db_connect
 
 
 class UpdaterSpider(scrapy.Spider):
